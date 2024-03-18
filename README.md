@@ -14,7 +14,7 @@
 - Before submitting the assignment write a brief explanation of your choices and any additional information you think is relevant.
 
 ## Briefing
-
+<img width="1414" alt="sample" src="https://github.com/simbase-tech/frontend-test-assignment/assets/64857643/089211b5-c7b1-469a-941c-fd5dfe4132bb">
 At the moment, when selecting a cat breed from the dropdown menu at the top, a corresponding list of photos is fetched and displayed. These photos, rendered within cards, have two buttons on them: a heart and an “X”. These buttons are now inactive.
 Your goal is to implement the following features and improvements to the application, while using tailwind CSS to style the UI components.
 
