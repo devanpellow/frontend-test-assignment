@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CatsDropdown from "../components/dropdown";
+import CatsLimitSelect from "../components/select";
 import Layout from "../components/layout";
 import { fetchCatsByBreed, getFavouriteCats } from "../helpers/cats-api";
 import { useQuery } from "@tanstack/react-query";
 import CatCard from "../components/cat-card";
-import { Cat, getFavouriteCatFromList } from "../helpers";
+import { Cat, fetchLimits, getFavouriteCatFromList } from "../helpers";
 
 const Home = () => {
   const [selectedBreed, setSelectedBreed] = useState<{
@@ -12,15 +13,28 @@ const Home = () => {
     id: string;
   }>({ name: "Abyssinian", id: "abys" });
 
-  const { data: cats, isLoading: isLoadingAllCats } = useQuery({
+  const [selectedLimit, setSelectedLimit] = useState<{
+    value: string;
+    label: string;
+  }>(fetchLimits[0]);
+
+  const {
+    data: cats,
+    isLoading: isLoadingAllCats,
+    refetch,
+  } = useQuery({
     queryKey: ["cats"],
-    queryFn: () => fetchCatsByBreed(selectedBreed),
+    queryFn: () => fetchCatsByBreed(selectedBreed, selectedLimit),
   });
 
   const { data: favouriteCats, isLoading: isLoadingFavouriteCats } = useQuery({
     queryKey: ["favourite-cats"],
     queryFn: () => getFavouriteCats("user-123"),
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, selectedBreed, selectedLimit]);
 
   if (isLoadingAllCats || isLoadingFavouriteCats)
     return (
@@ -30,14 +44,25 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="w-72 z-10">
-        <div className="my-3">
-          <CatsDropdown
-            selectedBreed={selectedBreed}
-            setSelectedBreed={setSelectedBreed}
-          />
+      <div className="flex gap-4">
+        <div className="w-72 z-10">
+          <div className="my-3">
+            <CatsDropdown
+              selectedBreed={selectedBreed}
+              setSelectedBreed={setSelectedBreed}
+            />
+          </div>
+        </div>
+        <div className="w-44 z-10">
+          <div className="my-3">
+            <CatsLimitSelect
+              selectedLimit={selectedLimit}
+              setSelectedLimit={setSelectedLimit}
+            />
+          </div>
         </div>
       </div>
+
       <div className="grid grid-cols-3 gap-3">
         {selectedBreed &&
           cats?.map((cat: Cat) => (

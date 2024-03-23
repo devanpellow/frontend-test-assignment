@@ -1,11 +1,36 @@
-interface SelectedBreed {
+export interface SelectedBreed {
   id: string;
   name: string;
 }
 
-export const fetchCatsByBreed = async (selectedBreed: SelectedBreed) => {
+export interface SelectedLimit {
+  value: string;
+  label: string;
+}
+
+export const fetchBreeds = async () => {
   const response = await fetch(
-    `https://api.thecatapi.com/v1/images/search?breed_ids=${selectedBreed?.id}&limit=20`,
+    "https://api.thecatapi.com/v1/breeds?limit=100&page=0",
+    {
+      headers: {
+        "x-api-key": import.meta.env.VITE_CAT_API_KEY,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+  return data;
+};
+
+export const fetchCatsByBreed = async (
+  selectedBreed: SelectedBreed,
+  selectedLimit: SelectedLimit
+) => {
+  console.log(selectedBreed, selectedLimit, "selected breed and limit");
+  const response = await fetch(
+    `https://api.thecatapi.com/v1/images/search?breed_ids=${
+      selectedBreed?.id
+    }&limit=${selectedLimit?.value ?? "20"}`,
     {
       headers: {
         "x-api-key": import.meta.env.VITE_CAT_API_KEY,
@@ -47,15 +72,17 @@ export const getFavouriteCats = async (userId: string) => {
 };
 
 export const removeCatFromFavourites = async (id: string) => {
-    const response = await fetch(`https://api.thecatapi.com/v1/favourites/${id}`, {
-        method: "DELETE",
-        headers: {
+  const response = await fetch(
+    `https://api.thecatapi.com/v1/favourites/${id}`,
+    {
+      method: "DELETE",
+      headers: {
         "x-api-key": import.meta.env.VITE_CAT_API_KEY,
         "Content-Type": "application/json",
-        },
-    });
-    const data = await response.json();
-    console.log(data, "remove cat from favs");
-    return data;
-}
-
+      },
+    }
+  );
+  const data = await response.json();
+  console.log(data, "remove cat from favs");
+  return data;
+};

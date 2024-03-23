@@ -1,10 +1,10 @@
 import React from "react";
 
-type ButtonProps = {
+interface ButtonProps {
   variant: "primary" | "secondary";
   onClick: () => void;
   children: React.ReactNode;
-};
+}
 
 export const BaseButton = ({
   variant,

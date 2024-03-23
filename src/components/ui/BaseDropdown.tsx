@@ -3,7 +3,13 @@ import { useState } from "react";
 import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
 import { Fragment } from "react/jsx-runtime";
 
-export const BaseDropdown = ({ values, setSelectedValue, selectedValue }) => {
+export interface BaseDropdownProps {
+  values: { name: string; id: string }[];
+  selectedValue: { name: string; id: string };
+  setSelectedValue: (value: { name: string; id: string }) => void;
+}
+
+export const BaseDropdown = ({ values, setSelectedValue, selectedValue }: BaseDropdownProps) => {
   // Implement typing while keeping the component reusable
 
   const [searchString, setSearchString] = useState("");
@@ -20,7 +26,7 @@ export const BaseDropdown = ({ values, setSelectedValue, selectedValue }) => {
         <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 focus:ring-transparent sm:text-sm">
           <Combobox.Input
             className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-1 rounded-lg "
-            displayValue={(value) => value.name}
+            displayValue={(value: { name: string; id: string }) => value.name}
             onChange={(event) => setSearchString(event.target.value)}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

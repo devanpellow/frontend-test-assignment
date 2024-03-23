@@ -1,5 +1,7 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { BaseDropdown } from "./ui/BaseDropdown";
+import { fetchBreeds } from "../helpers/cats-api";
+import { useQuery } from "@tanstack/react-query";
 
 const CatsDropdown = ({
   setSelectedBreed,
@@ -8,29 +10,14 @@ const CatsDropdown = ({
   selectedBreed: { name: string; id: string };
   setSelectedBreed: Dispatch<SetStateAction<{ name: string; id: string }>>;
 }) => {
-  const [breeds, setBreeds] = useState<{ name: string; id: string }[]>([
-    { name: "", id: "" },
-  ]);
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        "https://api.thecatapi.com/v1/breeds?limit=100&page=0",
-        {
-          headers: {
-            "x-api-key": import.meta.env.VITE_CAT_API_KEY,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      setBreeds(data);
-    })();
-  }, []);
+  const { data: breedsData } = useQuery({
+    queryKey: ["breeds"],
+    queryFn: fetchBreeds,
+  });
 
   return (
     <BaseDropdown
-      values={breeds}
+      values={breedsData}
       selectedValue={selectedBreed}
       setSelectedValue={setSelectedBreed}
     />
