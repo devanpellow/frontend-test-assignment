@@ -9,9 +9,11 @@ export interface BaseDropdownProps {
   setSelectedValue: (value: { name: string; id: string }) => void;
 }
 
-export const BaseDropdown = ({ values, setSelectedValue, selectedValue }: BaseDropdownProps) => {
-  // Implement typing while keeping the component reusable
-
+export const BaseDropdown = ({
+  values,
+  setSelectedValue,
+  selectedValue,
+}: BaseDropdownProps) => {
   const [searchString, setSearchString] = useState("");
   const filteredValues =
     searchString === ""

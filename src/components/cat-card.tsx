@@ -9,7 +9,6 @@ import { BaseModal } from "./ui/BaseModal";
 import { Cat, QueryKeys } from "../helpers";
 
 interface CatCardProps {
-  key: string;
   id: string;
   imageUrl: string;
   altText: string; // Ideally pass the description of the cat here
@@ -19,7 +18,6 @@ interface CatCardProps {
 }
 
 const CatCard: React.FC<CatCardProps> = ({
-  key,
   id,
   imageUrl,
   altText,
@@ -86,11 +84,8 @@ const CatCard: React.FC<CatCardProps> = ({
 
   return (
     <>
-      <div key={key} className="flex justify-center">
-        <div
-          key={id}
-          className="relative border rounded-lg overflow-hidden shadow-md flex justify-center w-3/4 md:w-full"
-        >
+      <div key={id} className="flex justify-center">
+        <div className="relative border rounded-lg overflow-hidden shadow-md flex justify-center w-3/4 md:w-full">
           <img
             className="object-cover aspect-square"
             src={imageUrl}
@@ -132,7 +127,7 @@ const CatCard: React.FC<CatCardProps> = ({
         isOpen={isRemoveWarningModalOpen}
         onClose={() => setIsRemoveWarningModalOpen(false)}
         title="Are you sure you want to remove this cat from the current list?"
-        description="You can always add it back later."
+        description="You can always search for it again later."
         confirmAction={() => removeFromState(id)}
       />
     </>

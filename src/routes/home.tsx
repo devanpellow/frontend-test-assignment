@@ -12,6 +12,7 @@ import {
   QueryKeys,
 } from "../helpers";
 import { BaseSpinner } from "../components/ui/BaseSpinner";
+import Filter from "../components/filter";
 
 const Home = () => {
   const queryClient = useQueryClient();
@@ -52,24 +53,12 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col md:flex-row md:gap-4 items-center">
-        <div className="w-3/4 md:w-72 z-10">
-          <div className="my-3">
-            <CatsDropdown
-              selectedBreed={selectedBreed}
-              setSelectedBreed={setSelectedBreed}
-            />
-          </div>
-        </div>
-        <div className="w-3/4 md:w-72 z-10">
-          <div className="my-3">
-            <CatsLimitSelect
-              selectedLimit={selectedLimit}
-              setSelectedLimit={setSelectedLimit}
-            />
-          </div>
-        </div>
-      </div>
+      <Filter
+        selectedBreed={selectedBreed}
+        setSelectedBreed={setSelectedBreed}
+        selectedLimit={selectedLimit}
+        setSelectedLimit={setSelectedLimit}
+      />
       {isLoading && <BaseSpinner />}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {!isLoading &&
