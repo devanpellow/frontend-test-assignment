@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import CatsDropdown from "../components/dropdown";
-import CatsLimitSelect from "../components/select";
 import Layout from "../components/layout";
 import { fetchCatsByBreed, getFavouriteCats } from "../helpers/cats-api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
