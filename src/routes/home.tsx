@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { HiXMark, HiOutlineHeart } from "react-icons/hi2";
+import { useState } from "react";
 import CatsDropdown from "../components/dropdown";
 import Layout from "../components/layout";
-import { addCatToFavourites, fetchCatsByBreed } from "../helpers/cats-api";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { CardSkeletonLoader } from "../components/card-skeleton-loader";
+import { fetchCatsByBreed, getFavouriteCats } from "../helpers/cats-api";
+import { useQuery } from "@tanstack/react-query";
+import CatCard from "../components/cat-card";
+import { Cat, getFavouriteCatFromList } from "../helpers";
 
 const Home = () => {
   const [selectedBreed, setSelectedBreed] = useState<{
@@ -12,33 +12,21 @@ const Home = () => {
     id: string;
   }>({ name: "Abyssinian", id: "abys" });
 
-  const {
-    data: cats,
-    isLoading,
-  } = useQuery({
+  const { data: cats, isLoading: isLoadingAllCats } = useQuery({
     queryKey: ["cats"],
     queryFn: () => fetchCatsByBreed(selectedBreed),
   });
-  console.log(cats, "cats")
-  const {mutateAsync: addCatToFavouritesMutation} = useMutation({
-    mutationFn: (id: string) => addCatToFavourites(id),
+
+  const { data: favouriteCats, isLoading: isLoadingFavouriteCats } = useQuery({
+    queryKey: ["favourite-cats"],
+    queryFn: () => getFavouriteCats("user-123"),
   });
 
-  if (isLoading)
+  if (isLoadingAllCats || isLoadingFavouriteCats)
     return (
       // todo: add a skeleton loader for the cats
-      <div>is loading....</div>
+      <div>Is Loading... </div>
     );
-
-  const handleToggleFavourite = async (id: string) => {
-    console.log("Toggle favorite cat with id: ", id);
-    try {
-      await addCatToFavouritesMutation(id);
-      // some confirmation to the user that the cat has been added to the favorites
-    } catch (error) {
-      console.error("Error adding cat to favorites: ", error);
-    }
-  };
 
   return (
     <Layout>
@@ -52,37 +40,19 @@ const Home = () => {
       </div>
       <div className="grid grid-cols-3 gap-3">
         {selectedBreed &&
-          cats?.map((cat) => (
-            <div key={cat.id}>
-              <div
-                key={cat.id}
-                className="relative border rounded-lg overflow-hidden shadow-md flex justify-center"
-              >
-                <img src={cat.url} className="object-cover aspect-square " />
-                <div className="absolute bottom-2 w-auto p-2 bg-white/50 rounded-full ">
-                  <div className="flex gap-2 ">
-                    <button
-                      // todo: add a confirmation modal before removing a cat from the list and
-                      className="bg-gray-100 p-4 rounded-full hover:text-red-900 hover:transition"
-                      onClick={() =>
-                        console.log(
-                          "Open confirmation modal -> remove from local state"
-                        )
-                      }
-                    >
-                      <HiXMark className="text-red-500 text-3xl" />
-                    </button>
-                    <button
-                      className="bg-gray-100 p-4 rounded-full hover:text-rose-400 hover:transition"
-                      onClick={() => handleToggleFavourite(cat.id)}
-                    >
-                      {/* Use this icon to show that a picture has been favorited by a user <HiHeart /> */}
-                      <HiOutlineHeart className="text-3xl" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+          cats?.map((cat: Cat) => (
+            <CatCard
+              key={cat.id}
+              id={cat.id}
+              imageUrl={cat.url}
+              altText={"Cat Name"}
+              isFavourite={Boolean(
+                getFavouriteCatFromList(cat.id, favouriteCats)
+              )}
+              favouriteCatId={
+                getFavouriteCatFromList(cat.id, favouriteCats)?.id
+              }
+            />
           ))}
       </div>
     </Layout>

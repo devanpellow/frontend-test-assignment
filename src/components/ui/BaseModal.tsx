@@ -38,15 +38,18 @@ export const BaseModal = ({
       as={Fragment}
     >
       <Dialog onClose={onClose} className="fixed inset-0 z-10 overflow-y-auto">
-        <div className="fixed inset-0 bg-black/5" aria-hidden="true" />
+        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-          <Dialog.Panel className="mx-auto max-w-sm rounded bg-white p-8 text-center">
-            <Dialog.Title className='text-xl font-bold'>{title}</Dialog.Title>
+          <Dialog.Panel className="mx-auto max-w-sm rounded bg-white p-8 text-center min-w-1/3">
+            
+            <Dialog.Title className="text-xl font-bold">{title}</Dialog.Title>
+            
+            <Dialog.Description className="py-6">
+              {description}
+            </Dialog.Description>
 
-            <Dialog.Description className='py-6'>{description}</Dialog.Description>
-
-            <div className="w-full flex justify-around">
+            <div className="w-full flex justify-around mx-auto">
               <BaseButton variant="secondary" onClick={() => onClose()}>
                 {cancelText}
               </BaseButton>
