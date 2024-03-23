@@ -53,7 +53,7 @@ const Home = () => {
   return (
     <Layout>
       <div className="flex flex-col md:flex-row md:gap-4 items-center">
-        <div className="w-72 z-10">
+        <div className="w-3/4 md:w-72 z-10">
           <div className="my-3">
             <CatsDropdown
               selectedBreed={selectedBreed}
@@ -61,7 +61,7 @@ const Home = () => {
             />
           </div>
         </div>
-        <div className="w-72 z-10">
+        <div className="w-3/4 md:w-72 z-10">
           <div className="my-3">
             <CatsLimitSelect
               selectedLimit={selectedLimit}

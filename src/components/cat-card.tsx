@@ -86,10 +86,10 @@ const CatCard: React.FC<CatCardProps> = ({
 
   return (
     <>
-      <div key={key} className="mx-4 flex justify-center md:mx-0">
+      <div key={key} className="flex justify-center">
         <div
           key={id}
-          className="relative border rounded-lg overflow-hidden shadow-md flex justify-center w-5/6 md:w-full"
+          className="relative border rounded-lg overflow-hidden shadow-md flex justify-center w-3/4 md:w-full"
         >
           <img
             className="object-cover aspect-square"
@@ -97,18 +97,18 @@ const CatCard: React.FC<CatCardProps> = ({
             alt={altText}
           />
 
-          <div className="absolute bottom-2 w-auto p-2 sm:bg-white/50 rounded-full ">
+          <div className="absolute bottom-2 w-auto p-2 bg-white/50 rounded-full ">
             <div className="flex gap-2 ">
               {removeOption && (
                 <button
-                  className="bg-gray-100 p-3 md:p-4 rounded-full hover:text-red-900 hover:transition"
+                  className="bg-gray-100 p-4 rounded-full hover:text-red-900 hover:transition"
                   onClick={() => setIsRemoveWarningModalOpen(true)}
                 >
-                  <HiXMark className="text-red-500 text-2xl md:text-3xl" />
+                  <HiXMark className="text-red-500 text-xl md:text-2xl lg:text-3xl" />
                 </button>
               )}
               <button
-                className="bg-gray-100 p-3 md:p-4 rounded-full hover:text-rose-400 hover:transition"
+                className="bg-gray-100 p-4 rounded-full hover:text-rose-400 hover:transition"
                 onClick={() => handleToggleFavourite(id)}
               >
                 {isFavourite || isClicked ? (
