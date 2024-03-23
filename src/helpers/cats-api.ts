@@ -45,3 +45,17 @@ export const getFavouriteCats = async (userId: string) => {
   const data = await response.json();
   return data;
 };
+
+export const removeCatFromFavourites = async (id: string) => {
+    const response = await fetch(`https://api.thecatapi.com/v1/favourites/${id}`, {
+        method: "DELETE",
+        headers: {
+        "x-api-key": import.meta.env.VITE_CAT_API_KEY,
+        "Content-Type": "application/json",
+        },
+    });
+    const data = await response.json();
+    console.log(data, "remove cat from favs");
+    return data;
+}
+
