@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { BaseDropdown } from "./ui/BaseDropdown";
 import { fetchBreeds } from "../helpers/cats-api";
 import { useQuery } from "@tanstack/react-query";
+import { QueryKeys } from "../helpers";
 
 const CatsDropdown = ({
   setSelectedBreed,
@@ -11,7 +12,7 @@ const CatsDropdown = ({
   setSelectedBreed: Dispatch<SetStateAction<{ name: string; id: string }>>;
 }) => {
   const { data: breedsData } = useQuery({
-    queryKey: ["breeds"],
+    queryKey: [QueryKeys.BREEDS],
     queryFn: fetchBreeds,
   });
 

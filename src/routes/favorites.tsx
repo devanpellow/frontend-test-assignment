@@ -3,26 +3,20 @@ import Layout from "../components/layout";
 import { getFavouriteCats } from "../helpers/cats-api";
 
 import CatCard from "../components/cat-card";
-import { FavouriteCat } from "../helpers";
+import { FavouriteCat, QueryKeys } from "../helpers";
+import { BaseSpinner } from "../components/ui/BaseSpinner";
 
 const Favorites = () => {
   const { data: favouriteCats, isLoading } = useQuery({
-    queryKey: ["favourite-cats"],
+    queryKey: [QueryKeys.FAVOURITE_CATS],
     queryFn: () => getFavouriteCats("user-123"),
   });
-  console.log(favouriteCats, "favourite cats");
-  if (isLoading)
-    // todo: add a skeleton loader for the cats
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
 
   return (
     <Layout>
-      {favouriteCats.length > 0 ? (
-        <div className="grid grid-cols-3 gap-3">
+      {isLoading && <BaseSpinner />}
+      {!isLoading && favouriteCats.length > 0 && (
+        <div className="grid grid-cols-3 gap-3 my-3">
           {favouriteCats?.map((cat: FavouriteCat) => (
             <CatCard
               key={cat.id}
@@ -33,7 +27,8 @@ const Favorites = () => {
             />
           ))}
         </div>
-      ) : (
+      )}
+      {!isLoading && favouriteCats.length === 0 && (
         <h1>
           You haven't picked your favourite cat pictures yet! You must not have
           seen them.{" "}

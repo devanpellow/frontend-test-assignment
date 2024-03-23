@@ -26,7 +26,6 @@ export const fetchCatsByBreed = async (
   selectedBreed: SelectedBreed,
   selectedLimit: SelectedLimit
 ) => {
-  console.log(selectedBreed, selectedLimit, "selected breed and limit");
   const response = await fetch(
     `https://api.thecatapi.com/v1/images/search?breed_ids=${
       selectedBreed?.id
@@ -52,7 +51,6 @@ export const addCatToFavourites = async (id: string) => {
     body: JSON.stringify({ image_id: id, sub_id: "user-123" }),
   });
   const data = await response.json();
-  console.log(data, "add cat to favs");
   return data;
 };
 
@@ -83,6 +81,5 @@ export const removeCatFromFavourites = async (id: string) => {
     }
   );
   const data = await response.json();
-  console.log(data, "remove cat from favs");
   return data;
 };
