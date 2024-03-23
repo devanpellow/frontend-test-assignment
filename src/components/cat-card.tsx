@@ -43,7 +43,6 @@ const CatCard: React.FC<CatCardProps> = ({
     mutationFn: (id: string) => removeCatFromFavourites(favouriteCatId ?? id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.FAVOURITE_CATS] });
-      queryClient.invalidateQueries({ queryKey: [QueryKeys.CATS] });
     },
   });
 
