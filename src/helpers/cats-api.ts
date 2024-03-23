@@ -1,3 +1,5 @@
+import { QueryKeys } from ".";
+
 export interface SelectedBreed {
   id: string;
   name: string;
@@ -48,7 +50,7 @@ export const addCatToFavourites = async (id: string) => {
       "x-api-key": import.meta.env.VITE_CAT_API_KEY,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ image_id: id, sub_id: "user-123" }),
+    body: JSON.stringify({ image_id: id, sub_id: QueryKeys.DEFAULT_USER_ID }),
   });
   const data = await response.json();
   return data;
@@ -56,7 +58,7 @@ export const addCatToFavourites = async (id: string) => {
 
 export const getFavouriteCats = async (userId: string) => {
   const response = await fetch(
-    `https://api.thecatapi.com/v1/favourites?sub_id=${userId ?? "user-123"}`,
+    `https://api.thecatapi.com/v1/favourites?sub_id=${userId ?? QueryKeys.DEFAULT_USER_ID}`,
     {
       method: "GET",
       headers: {

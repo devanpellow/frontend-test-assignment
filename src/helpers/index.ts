@@ -2,6 +2,7 @@ export enum QueryKeys {
   BREEDS = "breeds",
   CATS = "cats",
   FAVOURITE_CATS = "favourite-cats",
+  DEFAULT_USER_ID = "user-123",
 }
 
 export interface Cat {

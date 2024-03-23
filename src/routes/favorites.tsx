@@ -9,7 +9,7 @@ import { BaseSpinner } from "../components/ui/BaseSpinner";
 const Favorites = () => {
   const { data: favouriteCats, isLoading } = useQuery({
     queryKey: [QueryKeys.FAVOURITE_CATS],
-    queryFn: () => getFavouriteCats("user-123"),
+    queryFn: () => getFavouriteCats(QueryKeys.DEFAULT_USER_ID),
   });
 
   return (

@@ -22,18 +22,17 @@ const Home = () => {
     data: catsResponse,
     isLoading: isLoadingAllCats,
     refetch,
-    isRefetching,
   } = useQuery({
     queryKey: [QueryKeys.CATS],
     queryFn: () => fetchCatsByBreed(selectedBreed, selectedLimit),
   });
   const { data: favouriteCats, isLoading: isLoadingFavouriteCats } = useQuery({
     queryKey: [QueryKeys.FAVOURITE_CATS],
-    queryFn: () => getFavouriteCats("user-123"),
+    queryFn: () => getFavouriteCats(QueryKeys.DEFAULT_USER_ID), // This is where the user id should be passed default for now
   });
 
   const catList = catCache?.data || catsResponse;
-  const isLoading = isLoadingAllCats || isLoadingFavouriteCats || isRefetching;
+  const isLoading = isLoadingAllCats || isLoadingFavouriteCats;
 
   const [selectedBreed, setSelectedBreed] = useState<{
     name: string;

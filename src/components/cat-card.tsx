@@ -26,7 +26,7 @@ const CatCard: React.FC<CatCardProps> = ({
   removeOption,
 }) => {
   const queryClient = useQueryClient();
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(isFavourite); // optimistically update the UI
   const [isFavouritesWarningModalOpen, setIsFavouritesWarningModalOpen] =
     useState(false);
   const [isRemoveWarningModalOpen, setIsRemoveWarningModalOpen] =
@@ -106,7 +106,7 @@ const CatCard: React.FC<CatCardProps> = ({
                 className="bg-gray-100 p-4 rounded-full hover:text-rose-400 hover:transition"
                 onClick={() => handleToggleFavourite(id)}
               >
-                {isFavourite || isClicked ? (
+                {isClicked ? (
                   <HiHeart className="text-xl md:text-2xl lg:text-3xl text-rose-400" />
                 ) : (
                   <HiOutlineHeart className="text-xl md:text-2xl lg:text-3xl" />
