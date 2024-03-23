@@ -1,33 +1,48 @@
 import { useEffect, useState } from "react";
 import { HiXMark, HiOutlineHeart } from "react-icons/hi2";
 import CatsDropdown from "../components/dropdown";
+import Layout from "../components/layout";
+import { addCatToFavourites, fetchCatsByBreed } from "../helpers/cats-api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { CardSkeletonLoader } from "../components/card-skeleton-loader";
 
 const Home = () => {
   const [selectedBreed, setSelectedBreed] = useState<{
     name: string;
     id: string;
   }>({ name: "Abyssinian", id: "abys" });
-  const [cats, setCats] = useState<{ url: string; id: string }[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        `https://api.thecatapi.com/v1/images/search?breed_ids=${selectedBreed?.id}&limit=10`,
-        {
-          headers: {
-            "x-api-key": import.meta.env.VITE_CAT_API_KEY,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      setCats(data);
-    })();
-  }, [selectedBreed]);
+  const {
+    data: cats,
+    isLoading,
+  } = useQuery({
+    queryKey: ["cats"],
+    queryFn: () => fetchCatsByBreed(selectedBreed),
+  });
+  console.log(cats, "cats")
+  const {mutateAsync: addCatToFavouritesMutation} = useMutation({
+    mutationFn: (id: string) => addCatToFavourites(id),
+  });
+
+  if (isLoading)
+    return (
+      // todo: add a skeleton loader for the cats
+      <div>is loading....</div>
+    );
+
+  const handleToggleFavourite = async (id: string) => {
+    console.log("Toggle favorite cat with id: ", id);
+    try {
+      await addCatToFavouritesMutation(id);
+      // some confirmation to the user that the cat has been added to the favorites
+    } catch (error) {
+      console.error("Error adding cat to favorites: ", error);
+    }
+  };
 
   return (
-    <main className="container mx-auto">
-      <div className=" w-72 z-10">
+    <Layout>
+      <div className="w-72 z-10">
         <div className="my-3">
           <CatsDropdown
             selectedBreed={selectedBreed}
@@ -47,7 +62,8 @@ const Home = () => {
                 <div className="absolute bottom-2 w-auto p-2 bg-white/50 rounded-full ">
                   <div className="flex gap-2 ">
                     <button
-                      className="bg-gray-100 p-4 rounded-full"
+                      // todo: add a confirmation modal before removing a cat from the list and
+                      className="bg-gray-100 p-4 rounded-full hover:text-red-900 hover:transition"
                       onClick={() =>
                         console.log(
                           "Open confirmation modal -> remove from local state"
@@ -57,8 +73,8 @@ const Home = () => {
                       <HiXMark className="text-red-500 text-3xl" />
                     </button>
                     <button
-                      className="bg-gray-100 p-4 rounded-full"
-                      onClick={() => "Add/Remove from favorites"}
+                      className="bg-gray-100 p-4 rounded-full hover:text-rose-400 hover:transition"
+                      onClick={() => handleToggleFavourite(cat.id)}
                     >
                       {/* Use this icon to show that a picture has been favorited by a user <HiHeart /> */}
                       <HiOutlineHeart className="text-3xl" />
@@ -69,7 +85,7 @@ const Home = () => {
             </div>
           ))}
       </div>
-    </main>
+    </Layout>
   );
 };
 
