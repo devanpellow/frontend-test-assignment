@@ -88,6 +88,20 @@ const Home = () => {
             />
           ))}
       </div>
+      {!isLoading && catList && catList.length < selectedLimit.value && (
+        <div className="flex justify-center w-full">
+          <h1 className="font-bold mt-8 dark:text-white">
+            That's all the images we have for you!
+          </h1>
+        </div>
+      )}
+      {!isLoading && catList.length === 0 && (
+        <div className="my-3 text-center dark:text-gray-200">
+          <h1 className="font-bold dark:text-white">
+            A dog must be on a loose! No cats showed up for the selected breed.
+          </h1>
+        </div>
+      )}
     </Layout>
   );
 };
