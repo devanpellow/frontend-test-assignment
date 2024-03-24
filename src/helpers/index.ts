@@ -26,6 +26,8 @@ export const getFavouriteCatFromList = (
   return favouriteCat;
 };
 
+export const defaultBreedValue = { name: "Abyssinian", id: "abys" };
+
 export const fetchLimits = [
   { value: "10", label: "10 responses" },
   { value: "25", label: "25 responses" },

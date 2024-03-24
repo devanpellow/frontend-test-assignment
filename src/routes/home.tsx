@@ -7,6 +7,7 @@ import {
   Cat,
   fetchLimits,
   getFavouriteCatFromList,
+  defaultBreedValue,
   QueryKeys,
 } from "../helpers";
 import { BaseSpinner } from "../components/ui/BaseSpinner";
@@ -17,6 +18,9 @@ const Home = () => {
   const catCache = queryClient.getQueryData([QueryKeys.CATS]) as {
     data?: Cat[];
   };
+
+  const { data: theme } = useQuery({ queryKey: ["theme"] });
+  const isDarkMode = theme === "dark";
 
   const {
     data: catsResponse,
@@ -37,7 +41,7 @@ const Home = () => {
   const [selectedBreed, setSelectedBreed] = useState<{
     name: string;
     id: string;
-  }>({ name: "Abyssinian", id: "abys" });
+  }>(defaultBreedValue);
 
   const [selectedLimit, setSelectedLimit] = useState<{
     value: string;
@@ -47,6 +51,13 @@ const Home = () => {
   useEffect(() => {
     refetch();
   }, [selectedBreed, selectedLimit]);
+
+  useEffect(() => {
+    // only change the breed if the user hasn't selected a breed
+    if (isDarkMode && defaultBreedValue === selectedBreed) {
+      setSelectedBreed({ name: "Bombay", id: "bomb" });
+    }
+  }, [isDarkMode]);
 
   return (
     <Layout>

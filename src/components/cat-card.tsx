@@ -84,7 +84,7 @@ const CatCard: React.FC<CatCardProps> = ({
   return (
     <>
       <div key={id} className="flex justify-center">
-        <div className="relative border rounded-lg overflow-hidden shadow-md flex justify-center w-3/4 md:w-full">
+        <div className="relative rounded-lg overflow-hidden shadow-md flex justify-center w-3/4 md:w-full">
           <img
             className="object-cover aspect-square"
             src={imageUrl}

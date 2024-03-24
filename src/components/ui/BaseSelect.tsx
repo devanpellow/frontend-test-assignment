@@ -32,18 +32,20 @@ export const BaseSelect = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-simbase-blue py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
               {options.map((option, index) => (
                 <Listbox.Option
                   key={index}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-teal-600 text-white" : "text-gray-900"
+                    `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                      active
+                        ? "bg-simbase-blue text-white dark:bg-simbase-orange"
+                        : "text-black dark:text-white"
                     }`
                   }
                   value={option}
                 >
-                  {({ selected }) => (
+                  {({ selected, active }) => (
                     <>
                       <span
                         className={`block truncate ${
@@ -53,7 +55,13 @@ export const BaseSelect = ({
                         {option.label}
                       </span>
                       {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-teal-600">
+                        <span
+                          className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                            active
+                              ? " text-white dark:text-simbase-blue"
+                              : "text-simbase-blue dark:text-simbase-orange"
+                          }`}
+                        >
                           <HiCheck className="h-5 w-5" aria-hidden="true" />
                         </span>
                       ) : null}

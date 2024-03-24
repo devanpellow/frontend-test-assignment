@@ -25,7 +25,7 @@ export const BaseDropdown = ({
   return (
     <Combobox value={selectedValue} onChange={setSelectedValue}>
       <div className="relative mt-1 z-10">
-        <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 focus:ring-transparent sm:text-sm">
+        <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-simebase-blue dark:focus-visible:ring-offset-simebase-orange focus:ring-transparent sm:text-sm">
           <Combobox.Input
             className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-1 rounded-lg "
             displayValue={(value: { name: string; id: string }) => value.name}
@@ -45,9 +45,9 @@ export const BaseDropdown = ({
           leaveTo="opacity-0"
           afterLeave={() => setSearchString("")}
         >
-          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-simbase-blue py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
             {filteredValues?.length === 0 && searchString !== "" ? (
-              <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
+              <div className="relative cursor-pointer select-none px-4 py-2 text-gray-700">
                 Nothing found.
               </div>
             ) : (
@@ -55,8 +55,10 @@ export const BaseDropdown = ({
                 <Combobox.Option
                   key={value.name}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-teal-600 text-white" : "text-gray-900"
+                    `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                      active
+                        ? "bg-simbase-blue dark:bg-simbase-orange text-white"
+                        : "text-gray-900 dark:text-white"
                     }`
                   }
                   value={value}
@@ -73,7 +75,9 @@ export const BaseDropdown = ({
                       {selected ? (
                         <span
                           className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                            active ? "text-white" : "text-teal-600"
+                            active
+                              ? "text-white dark:text-simbase-blue"
+                              : "text-simbase-blue dark:text-simbase-orange"
                           }`}
                         >
                           <HiCheck className="h-5 w-5" aria-hidden="true" />
