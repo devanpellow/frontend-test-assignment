@@ -29,7 +29,7 @@ const Favorites = () => {
         </div>
       )}
       {!isLoading && favouriteCats.length === 0 && (
-        <div className="my-3 text-center dark:text-gray-200">
+        <div className="my-3 text-center dark:text-gray-200" >
           <h1 className="font-bold">
             You haven't chosen your favourite cat pictures yet!
           </h1>

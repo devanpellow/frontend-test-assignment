@@ -100,11 +100,11 @@ const CatCard: React.FC<CatCardProps> = ({
             <div className="flex gap-2 ">
               {hasRemoveOption && (
                 <button
-                  className="bg-gray-100 p-4 rounded-full hover:text-red-900 hover:transition"
+                  className="bg-gray-100 p-4 rounded-full hover:text-red-500 hover:transition"
                   onClick={() => setIsRemoveWarningModalOpen(true)}
                   aria-label="Remove cat"
                 >
-                  <HiXMark className="text-red-500 text-xl md:text-2xl lg:text-3xl" />
+                  <HiXMark className="text-xl md:text-2xl lg:text-3xl" />
                 </button>
               )}
               <button
