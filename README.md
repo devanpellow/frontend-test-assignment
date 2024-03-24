@@ -2,7 +2,7 @@
 
 The site is live at [Devan's Cat-alog 🐈](https://devans-catalog.netlify.app/). 
 
-I've written some notes that explain how I would achieve something that I didn't implement / future improvements [here](https://devanpellow.notion.site/Simbase-Technical-Challenge-5b44c6e5def8471c87e55937e1e7ffa2)
+I've included some notes that explain how I would achieve something that I didn't implement / future improvements [here](https://devanpellow.notion.site/Simbase-Technical-Challenge-5b44c6e5def8471c87e55937e1e7ffa2)
 
 # simbase-frontend-assigment
 
