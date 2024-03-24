@@ -5,6 +5,7 @@ import {
   removeCatFromFavourites,
 } from "../helpers/cats-api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Snackbar } from "@mui/joy";
 import { BaseModal } from "./ui/BaseModal";
 import { Cat, QueryKeys } from "../helpers";
 
@@ -31,6 +32,9 @@ const CatCard: React.FC<CatCardProps> = ({
     useState(false);
   const [isRemoveWarningModalOpen, setIsRemoveWarningModalOpen] =
     useState(false);
+
+  const [isUnfavouritedToastOpen, setIsUnfavouritedToastOpen] = useState(false);
+  const [isRemovedToastOpen, setIsRemovedToastOpen] = useState(false);
 
   const { mutateAsync: addCatToFavouritesMutation } = useMutation({
     mutationFn: (id: string) => addCatToFavourites(id),
@@ -60,6 +64,7 @@ const CatCard: React.FC<CatCardProps> = ({
     try {
       await removeCatFromFavouritesMutation(id);
       setIsClicked(false);
+      setIsUnfavouritedToastOpen(true);
     } catch (error) {
       console.error("Error removing cat from favorites: ", error);
     }
@@ -73,12 +78,10 @@ const CatCard: React.FC<CatCardProps> = ({
     }
   };
 
-  const removeFromState = async (id: string) => {
+  const removeFromState = (id: string) => {
     queryClient.setQueryData([QueryKeys.CATS], (data: Cat[]) =>
       data.filter((cat: Cat) => cat.id !== id)
     );
-
-    setIsRemoveWarningModalOpen(false);
   };
 
   return (
@@ -135,6 +138,22 @@ const CatCard: React.FC<CatCardProps> = ({
         description="You can always search for it again later."
         confirmAction={() => removeFromState(id)}
       />
+      <Snackbar
+        color="success"
+        open={isRemovedToastOpen}
+        autoHideDuration={5000}
+        onClose={() => setIsRemovedToastOpen(false)}
+      >
+        Successfully removed cat from list
+      </Snackbar>
+      <Snackbar
+        color="success"
+        open={isUnfavouritedToastOpen}
+        autoHideDuration={5000}
+        onClose={() => setIsUnfavouritedToastOpen(false)}
+      >
+        Successfully removed cat from favourites
+      </Snackbar>
     </>
   );
 };

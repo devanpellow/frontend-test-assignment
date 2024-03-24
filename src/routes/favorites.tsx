@@ -29,16 +29,21 @@ const Favorites = () => {
         </div>
       )}
       {!isLoading && favouriteCats.length === 0 && (
-        <h1>
-          You haven't picked your favourite cat pictures yet! You must not have
-          seen them.{" "}
-          <span>
-            <a className="underline hover:cursor-pointer" href="/">
-              Click here
-            </a>
-          </span>{" "}
-          to go see some cat pictures.
-        </h1>
+        <div className="my-3 text-center dark:text-gray-200">
+          <h1 className="font-bold">
+            You haven't chosen your favourite cat pictures yet!
+          </h1>
+
+          <h1>
+            You must not have seen them.{" "}
+            <span>
+              <a className="underline hover:cursor-pointer" href="/">
+                Click here
+              </a>
+            </span>{" "}
+            to go see some purr-fect cat pictures.
+          </h1>
+        </div>
       )}
     </Layout>
   );
