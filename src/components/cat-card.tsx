@@ -89,6 +89,8 @@ const CatCard: React.FC<CatCardProps> = ({
             className="object-cover aspect-square"
             src={imageUrl}
             alt={altText}
+            role="img"
+            aria-label={altText}
           />
 
           <div className="absolute bottom-2 w-auto p-2 bg-white/50 rounded-full ">
@@ -97,6 +99,7 @@ const CatCard: React.FC<CatCardProps> = ({
                 <button
                   className="bg-gray-100 p-4 rounded-full hover:text-red-900 hover:transition"
                   onClick={() => setIsRemoveWarningModalOpen(true)}
+                  aria-label="Remove cat"
                 >
                   <HiXMark className="text-red-500 text-xl md:text-2xl lg:text-3xl" />
                 </button>
@@ -104,6 +107,9 @@ const CatCard: React.FC<CatCardProps> = ({
               <button
                 className="bg-gray-100 p-4 rounded-full hover:text-rose-400 hover:transition"
                 onClick={() => handleToggleFavourite(id)}
+                aria-label={
+                  isClicked ? "Remove from favorites" : "Add to favorites"
+                }
               >
                 {isClicked ? (
                   <HiHeart className="text-xl md:text-2xl lg:text-3xl text-rose-400" />

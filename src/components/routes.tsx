@@ -3,6 +3,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Switch } from "@headlessui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import { QueryKeys } from "../helpers";
 
 const routes = [
   { name: "Home", path: "/" },
@@ -19,14 +20,14 @@ const Routes = () => {
 
   if (isDarkMode) {
     document.documentElement.classList.add("dark");
-    queryClient.setQueryData(["theme"], "dark");
+    queryClient.setQueryData([QueryKeys.THEME], "dark");
   } else {
     document.documentElement.classList.remove("dark");
-    queryClient.setQueryData(["theme"], "light");
+    queryClient.setQueryData([QueryKeys.THEME], "light");
   }
 
   return (
-    <div className="flex py-5 border-b shadow-md dark:bg-simbase-blue dark:border-simbase-blue dark:shadow-simbase-orange  transition-colors duration-200 ease-in-out">
+    <div className="flex py-5 px-5 border-b shadow-md dark:bg-simbase-blue dark:border-simbase-blue dark:shadow-simbase-orange  transition-colors duration-200 ease-in-out">
       <div className="container mx-auto flex justify-between space-x-4">
         <div className="flex gap-4">
           {routes.map((route, idx) => {

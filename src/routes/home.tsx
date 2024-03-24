@@ -19,7 +19,7 @@ const Home = () => {
     data?: Cat[];
   };
 
-  const { data: theme } = useQuery({ queryKey: ["theme"] });
+  const { data: theme } = useQuery({ queryKey: [QueryKeys.THEME] });
   const isDarkMode = theme === "dark";
 
   const {
