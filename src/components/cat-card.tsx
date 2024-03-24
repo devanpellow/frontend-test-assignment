@@ -98,7 +98,7 @@ const CatCard: React.FC<CatCardProps> = ({
             <div className="flex gap-2 ">
               {hasRemoveOption && (
                 <button
-                data-testid={`remove-card-btn`}
+                  data-testid={`remove-card-btn`} // Ideally this should be dynamic with index or id but since I don't have Cypress fixtures I'm using this
                   className="bg-gray-100 p-4 rounded-full hover:text-red-500 hover:transition"
                   onClick={() => setIsRemoveWarningModalOpen(true)}
                   aria-label="Remove cat"
@@ -107,7 +107,7 @@ const CatCard: React.FC<CatCardProps> = ({
                 </button>
               )}
               <button
-              data-testid={`toggle-favourite-btn`}
+                data-testid={`toggle-favourite-btn`} // Ideally this should be dynamic with index or id but since I don't have Cypress fixtures I'm using this
                 className="bg-gray-100 p-4 rounded-full hover:text-rose-400 hover:transition"
                 onClick={() => handleToggleFavourite(id)}
                 aria-label={
