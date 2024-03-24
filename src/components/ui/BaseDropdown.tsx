@@ -26,7 +26,7 @@ export const BaseDropdown = ({
 
   return (
     <Combobox value={selectedValue} onChange={setSelectedValue}>
-      <div className="relative mt-1 z-10">
+      <div className="relative mt-1">
         {label && (
           <Combobox.Label className="block text-sm font-medium text-gray-700 dark:text-white">
             {label}

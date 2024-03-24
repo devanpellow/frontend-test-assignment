@@ -16,7 +16,7 @@ export const BaseSelect = ({
   onChange,
 }: BaseSelectProps) => {
   return (
-    <div className="w-full">
+    <div className="w-full z-auto">
       <Listbox value={selectedOption} onChange={onChange}>
         <div className="relative mt-1">
           {label && (
