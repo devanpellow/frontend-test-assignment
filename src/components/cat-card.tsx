@@ -53,7 +53,6 @@ const CatCard: React.FC<CatCardProps> = ({
     try {
       setIsClicked(true);
       await addCatToFavouritesMutation(id);
-      // some confirmation to the user that the cat has been added to the favorites
     } catch (error) {
       console.error("Error adding cat to favorites: ", error);
     }
