@@ -46,7 +46,7 @@ export const BaseSelect = ({
                   className={({ active }) =>
                     `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
                       active
-                        ? "bg-simbase-blue text-white dark:bg-simbase-orange/80"
+                        ? "bg-simbase-blue text-white dark:bg-simbase-orange/65"
                         : "text-black dark:text-white"
                     }`
                   }

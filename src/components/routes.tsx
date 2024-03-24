@@ -26,6 +26,12 @@ const Routes = () => {
     queryClient.setQueryData([QueryKeys.THEME], "light");
   }
 
+  const handleKeyDown = (event: { key: string; }) => {
+    if (event.key === 'Enter') {
+      toggleDarkMode();
+    }
+  }
+
   return (
     <div className="flex py-5 px-5 border-b shadow-md dark:bg-simbase-blue dark:border-simbase-blue dark:shadow-simbase-orange  transition-colors duration-200 ease-in-out">
       <div className="container mx-auto flex justify-between space-x-4">
@@ -56,6 +62,7 @@ const Routes = () => {
             className={`${
               isDarkMode ? "bg-simbase-orange" : "bg-gray-200"
             } relative inline-flex h-6 w-12 items-center rounded-full`}
+            onKeyDown={handleKeyDown}
           >
             <span className="sr-only">Enable dark mode</span>
             <span

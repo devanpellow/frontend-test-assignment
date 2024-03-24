@@ -26,7 +26,7 @@ const Home = () => {
     data: catsResponse,
     isLoading: isLoadingAllCats,
     refetch,
-    isRefetching
+    isRefetching,
   } = useQuery({
     queryKey: [QueryKeys.CATS],
     queryFn: () => fetchCatsByBreed(selectedBreed, selectedLimit),
@@ -84,7 +84,7 @@ const Home = () => {
               favouriteCatId={
                 getFavouriteCatFromList(cat.id, favouriteCats)?.id
               }
-              removeOption
+              hasRemoveOption
             />
           ))}
       </div>

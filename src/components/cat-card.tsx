@@ -14,7 +14,7 @@ interface CatCardProps {
   altText: string; // Ideally pass the description of the cat here
   isFavourite: boolean;
   favouriteCatId?: string;
-  removeOption?: boolean;
+  hasRemoveOption?: boolean;
 }
 
 const CatCard: React.FC<CatCardProps> = ({
@@ -23,7 +23,7 @@ const CatCard: React.FC<CatCardProps> = ({
   altText,
   isFavourite,
   favouriteCatId,
-  removeOption,
+  hasRemoveOption,
 }) => {
   const queryClient = useQueryClient();
   const [isClicked, setIsClicked] = useState(isFavourite); // optimistically update the UI
@@ -95,7 +95,7 @@ const CatCard: React.FC<CatCardProps> = ({
 
           <div className="absolute bottom-2 w-auto p-2 bg-white/50 rounded-full ">
             <div className="flex gap-2 ">
-              {removeOption && (
+              {hasRemoveOption && (
                 <button
                   className="bg-gray-100 p-4 rounded-full hover:text-red-900 hover:transition"
                   onClick={() => setIsRemoveWarningModalOpen(true)}

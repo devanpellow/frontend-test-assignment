@@ -64,7 +64,7 @@ export const BaseDropdown = ({
                   className={({ active }) =>
                     `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
                       active
-                        ? "bg-simbase-blue dark:bg-simbase-orange/80 text-white"
+                        ? "bg-simbase-blue dark:bg-simbase-orange/65 text-white"
                         : "text-gray-900 dark:text-white"
                     }`
                   }
