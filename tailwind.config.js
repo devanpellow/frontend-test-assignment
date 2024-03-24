@@ -2,7 +2,13 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "simbase-blue": "#123466",
+        "simbase-orange": "#ff5745",
+      },
+    },
   },
   plugins: [],
+  darkMode: "class",
 };
