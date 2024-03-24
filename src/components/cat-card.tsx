@@ -94,10 +94,11 @@ const CatCard: React.FC<CatCardProps> = ({
             aria-label={altText}
           />
 
-          <div className="absolute bottom-2 w-auto p-2 bg-white/50 rounded-full ">
+          <div className="absolute bottom-2 w-auto p-2 bg-white/50 rounded-full">
             <div className="flex gap-2 ">
               {hasRemoveOption && (
                 <button
+                data-testid={`remove-card-btn`}
                   className="bg-gray-100 p-4 rounded-full hover:text-red-500 hover:transition"
                   onClick={() => setIsRemoveWarningModalOpen(true)}
                   aria-label="Remove cat"
@@ -106,6 +107,7 @@ const CatCard: React.FC<CatCardProps> = ({
                 </button>
               )}
               <button
+              data-testid={`toggle-favourite-btn`}
                 className="bg-gray-100 p-4 rounded-full hover:text-rose-400 hover:transition"
                 onClick={() => handleToggleFavourite(id)}
                 aria-label={

@@ -16,6 +16,12 @@ describe("Favourite page", () => {
       "exist"
     );
   });
-  it("should render a spinner while loading", () => {});
-  it("should open a modal when unfavouriting a cat", () => {})
+  it("should open a modal when unfavouriting a cat", () => {
+    cy.get('[data-testid="toggle-favourite-btn"]').first().click();
+    cy.contains(
+      "Are you sure you want to remove this cat from your favorites?"
+    ).should("exist");
+    cy.contains("Confirm").click();
+    // intercept request and return cypress fixture list of no favourited cats
+  });
 });

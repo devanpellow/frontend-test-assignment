@@ -21,9 +21,27 @@ describe("Home page", () => {
   it("should refetch list when a limit is updated", () => {
     cy.get('[data-testid="dropdown-select-btn"]').click();
     cy.get('[data-testid="dropdown-option-25"]').click();
-    // intecept request and return cypress fixture list of Aegean cats
+    // intecept request and return cypress fixture list of 25 cats
   });
   it("should render a spinner while loading", () => {});
-  it("should open a modal when unfavouriting a cat", () => {});
-  it("should open a modal when removing a cat", () => {});
+
+  it("should open a modal when unfavouriting a cat", () => {
+    cy.get('[data-testid="toggle-favourite-btn"]').first().click();
+
+    cy.contains(
+      "Are you sure you want to remove this cat from your favorites?"
+    ).should("exist");
+
+    cy.contains("Confirm").click();
+  });
+
+  it("should open a modal when removing a cat", () => {
+    cy.get('[data-testid="remove-card-btn"]').first().click();
+
+    cy.contains(
+      "Are you sure you want to remove this cat from the current list?"
+    ).should("exist");
+
+    cy.contains("Confirm").click();
+  });
 });
