@@ -1,6 +1,7 @@
 describe("Home page", () => {
   beforeEach(() => {
     cy.visit(`http://localhost:5173`);
+
     // intercept request and return cypress fixture list of cats, favourite cats, and breeds
   });
 
@@ -12,9 +13,14 @@ describe("Home page", () => {
     // assert that all cats are rendered
     cy.get('[data-testid="cat-card"]').should("exist");
   });
-  it("should select different breed of cat and refetch list", () => {
+  it("should refetch list when a different breed is selected", () => {
     cy.get('[data-testid="dropdown-input-btn"]').click();
     cy.get('[data-testid="dropdown-option-Aegean"]').click();
+    // intecept request and return cypress fixture list of Aegean cats
+  });
+  it("should refetch list when a limit is updated", () => {
+    cy.get('[data-testid="dropdown-select-btn"]').click();
+    cy.get('[data-testid="dropdown-option-25"]').click();
     // intecept request and return cypress fixture list of Aegean cats
   });
   it("should render a spinner while loading", () => {});
