@@ -26,6 +26,7 @@ const Home = () => {
     data: catsResponse,
     isLoading: isLoadingAllCats,
     refetch,
+    isRefetching
   } = useQuery({
     queryKey: [QueryKeys.CATS],
     queryFn: () => fetchCatsByBreed(selectedBreed, selectedLimit),
@@ -36,7 +37,7 @@ const Home = () => {
   });
 
   const catList = catCache?.data || catsResponse;
-  const isLoading = isLoadingAllCats || isLoadingFavouriteCats;
+  const isLoading = isLoadingAllCats || isLoadingFavouriteCats || isRefetching;
 
   const [selectedBreed, setSelectedBreed] = useState<{
     name: string;
