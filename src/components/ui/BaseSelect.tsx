@@ -3,12 +3,14 @@ import { Fragment } from "react";
 import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
 
 export interface BaseSelectProps {
+  label?: string;
   options: { value: string; label: string }[];
   selectedOption: { value: string; label: string };
   onChange: (option: { value: string; label: string }) => void;
 }
 
 export const BaseSelect = ({
+  label,
   options,
   selectedOption,
   onChange,
@@ -17,6 +19,11 @@ export const BaseSelect = ({
     <div className="w-full">
       <Listbox value={selectedOption} onChange={onChange}>
         <div className="relative mt-1">
+          {label && (
+            <Listbox.Label className="block text-sm font-medium text-gray-700 dark:text-white">
+              {label}
+            </Listbox.Label>
+          )}
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 focus:ring-transparent sm:text-sm">
             <span className="block truncate">{selectedOption.label}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

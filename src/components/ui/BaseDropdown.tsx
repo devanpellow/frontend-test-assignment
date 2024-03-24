@@ -5,12 +5,14 @@ import { Fragment } from "react/jsx-runtime";
 
 export interface BaseDropdownProps {
   values: { name: string; id: string }[];
+  label?: string;
   selectedValue: { name: string; id: string };
   setSelectedValue: (value: { name: string; id: string }) => void;
 }
 
 export const BaseDropdown = ({
   values,
+  label,
   setSelectedValue,
   selectedValue,
 }: BaseDropdownProps) => {
@@ -25,6 +27,11 @@ export const BaseDropdown = ({
   return (
     <Combobox value={selectedValue} onChange={setSelectedValue}>
       <div className="relative mt-1 z-10">
+        {label && (
+          <Combobox.Label className="block text-sm font-medium text-gray-700 dark:text-white">
+            {label}
+          </Combobox.Label>
+        )}
         <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-simebase-blue dark:focus-visible:ring-offset-simebase-orange focus:ring-transparent sm:text-sm">
           <Combobox.Input
             className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:outline-1 rounded-lg "

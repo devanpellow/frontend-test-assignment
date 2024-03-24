@@ -18,6 +18,7 @@ const CatsDropdown = ({
 
   return (
     <BaseDropdown
+      label="Select a breed"
       values={breedsData}
       selectedValue={selectedBreed}
       setSelectedValue={setSelectedBreed}

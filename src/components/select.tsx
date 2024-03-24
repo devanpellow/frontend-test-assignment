@@ -11,6 +11,7 @@ const CatsLimitSelect = ({
 }) => {
   return (
     <BaseSelect
+      label="Select a limit"
       options={fetchLimits}
       selectedOption={selectedLimit}
       onChange={setSelectedLimit}
