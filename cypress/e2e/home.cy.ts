@@ -17,4 +17,7 @@ describe("Home page", () => {
     cy.get('[data-testid="dropdown-option-Aegean"]').click();
     // intecept request and return cypress fixture list of Aegean cats
   });
+  it("should render a spinner while loading", () => {});
+  it("should open a modal when unfavouriting a cat", () => {});
+  it("should open a modal when removing a cat", () => {});
 });
