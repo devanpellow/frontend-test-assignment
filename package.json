@@ -21,12 +21,15 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/mocha": "^10.0.6",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.18",
+    "cypress": "^13.7.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
