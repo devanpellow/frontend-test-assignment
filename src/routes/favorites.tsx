@@ -16,7 +16,7 @@ const Favorites = () => {
     <Layout>
       {isLoading && <BaseSpinner />}
       {!isLoading && favouriteCats.length > 0 && (
-        <div className="grid grid-cols-3 gap-3 my-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-3">
           {favouriteCats?.map((cat: FavouriteCat) => (
             <CatCard
               key={cat.id}
@@ -29,7 +29,7 @@ const Favorites = () => {
         </div>
       )}
       {!isLoading && favouriteCats.length === 0 && (
-        <div className="my-3 text-center dark:text-gray-200" >
+        <div className="my-3 text-center dark:text-gray-200">
           <h1 className="font-bold">
             You haven't chosen your favourite cat pictures yet!
           </h1>
