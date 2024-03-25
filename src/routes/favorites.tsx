@@ -12,8 +12,15 @@ const Favorites = () => {
     queryFn: () => getFavouriteCats(QueryKeys.DEFAULT_USER_ID),
   });
 
+  const numberOfFavouriteCats = favouriteCats?.length;
+
   return (
     <Layout>
+      {numberOfFavouriteCats > 0 && (
+        <h1 className="text-center dark:text-gray-200 font-bold">
+          You have {numberOfFavouriteCats} favourite cat pictures!
+        </h1>
+      )}
       {isLoading && <BaseSpinner />}
       {!isLoading && favouriteCats.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-3">
